@@ -1,0 +1,17 @@
+---
+- hosts: all
+  user: ansadmin
+  become: yes
+    
+  tasks:
+    - name: creating image from war file
+      command: docker build -t simple-devops-image:latest
+
+    - name: creating a tag for image
+      command: docker build tag simple-devops-image anjaneyulu143/simple-devops-image
+
+    - name: push to docker hub
+      command: docker push anjaneyulu143/simple-devops-image
+
+    - name: remove image from ansible server
+      command: docker rmi tomcat simple-devops-image:latest anjaneyulu143/simple-devops-image

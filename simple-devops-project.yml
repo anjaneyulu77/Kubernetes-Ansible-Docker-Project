@@ -1,0 +1,18 @@
+---
+- hosts: all
+  user: ansadmin
+  tasks:
+    - name: stop the running container
+      command: docker stop devops-container
+
+    - name: delete that container
+      command: docker rm devops-container
+
+    - name: remove the image
+      command: docker rmi anjaneyulu143/simple-devops-image
+
+    - name: pull the image from dockerhub
+      command: docker pull anjaneyulu143/simple-devops-image
+
+    - name: deploy to tomcat
+      command: docker run -d --name devops-container -p 8080:8080 anjaneyulu143/simple-devops-image
